@@ -1,0 +1,108 @@
+:root {
+    --dynamicTable-sticky-column-z-index: 1;
+    --px: 64px;
+}
+
+.root {
+    width: 100%;
+    height: 100%;
+    min-height: 90vh;
+    background-color: darkslategray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: auto;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: var(--map-width);
+}
+
+.cell {
+    position: relative;
+    width: var(--px);
+    height: var(--px);
+    background-color: #B6564A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+        opacity: .8;
+    }
+    &.disabled{
+        pointer-events: none;
+    }
+    .door {
+        position: absolute;
+        background-color: steelblue;
+        &.left{
+            width: 4px;
+            height: 40px;
+            left: 0;
+        }
+        &.right{
+            width: 4px;
+            height: 40px;
+            right: 0;
+        }
+        &.bottom{
+            width: 40px;
+            height: 4px;
+            bottom: 0;
+        }
+
+    }
+
+    &.open{
+        background-color: darksalmon;
+        .door {
+            background-color: darksalmon;
+        }
+    }
+
+    &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 2px solid steelblue;
+    }
+}
+
+.heroes {
+    position: absolute;
+    background-color: rgba(240,20,20,.4);
+    pointer-events: none;
+    &Wrap{
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .hero {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--px);
+        height: var(--px);
+        padding: 8px;
+        transform: translate(0,0);
+        transition: transform .2s ease-in-out;
+        .body {
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 1px 2px 3px rgba(0,10,20,.3);
+            width: 24px;
+            height: 24px;
+        }
+    }
+}
