@@ -1,0 +1,52 @@
+.root {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: darkslategray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9;
+}
+
+.heroesGrid {
+    display: grid;
+    grid-template-columns: var(--px) var(--px) var(--px);
+    grid-template-rows: var(--px) var(--px);
+    grid-gap: 24px;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    flex-direction: column;
+}
+
+
+.warning {
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    padding: 20px;
+    height: 30px;
+    text-align: center;
+    color: #e6e9ec;
+    font-size: 28px;
+}

@@ -1,0 +1,23 @@
+.content {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.text {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.img {
+    width: calc(var(--px) * 2);
+    padding: 20px;
+}
+.buttons {
+    display: flex;
+
+    .button:not(:last-child) {
+        margin-right: 12px;
+    }
+}

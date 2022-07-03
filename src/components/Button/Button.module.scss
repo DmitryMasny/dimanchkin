@@ -1,0 +1,30 @@
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 20px;
+  font-size: 32px;
+  border-radius: 30px;
+  color: #25242f;
+  background-color: #e6e9ec;
+  box-shadow: 1px 2px 3px rgba(18, 17, 25, 0.3);
+  cursor: pointer;
+
+  &:hover {
+    background-color: white;
+  }
+  &:active {
+    box-shadow: 1px 2px 14px rgba(18, 17, 25, 0.3) inset;
+  }
+
+  &.warning {
+    background-color: #efb67c;
+  }
+  &.danger {
+    background-color: #ef7c88;
+  }
+  &.success {
+    background-color: #b3cb6a;
+  }
+}

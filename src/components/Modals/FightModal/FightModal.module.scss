@@ -1,0 +1,37 @@
+.lvl1 {
+    background-color: #adc2c8 !important;
+}
+.lvl2 {
+    background-color: #eac7c2 !important;
+}
+.lvl3 {
+    background-color: #e8d6b1 !important;
+}
+.lvl4 {
+    background-color: #cbb0d0 !important;
+}
+
+.content {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.text {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.img {
+    width: calc(var(--px) * 2);
+    padding: 20px;
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+
+    .button {
+        margin-bottom: 8px;
+    }
+}
