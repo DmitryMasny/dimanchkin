@@ -49,7 +49,7 @@ const FightModal: FC<FightModalProps & { open: boolean }> = ({
             {buttons}
         </div>)
     }, [open, monster, buttons]);
-console.info('monster.lvl', monster?.lvl)
+
     return (
         <ModalWrapper open={open} className={monster ? s[`lvl${monster.lvl || ''}`] : ''}>
             {content}

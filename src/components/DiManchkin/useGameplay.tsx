@@ -31,8 +31,7 @@ const useGameplay = ({config}: Props) => {
 
     const [heroCanMove, setHeroCanMove] = useState<boolean>(true);
     const [heroCanOpenDoor, setHeroCanOpenDoor] = useState<boolean>(true);
-console.info('heroCanMove', heroCanMove)
-    console.info('heroCanOpenDoor', heroCanOpenDoor)
+
     useEffect(() => {
         if (!map) {
             setMap(generateMap(config));
@@ -95,7 +94,7 @@ console.info('heroCanMove', heroCanMove)
                     ...h[heroId],
                     x: prevX,
                     y: prevY,
-                    ...(isLoose ? {lvl: Math.min(h[heroId].lvl - 1, 1)} : {}),
+                    ...(isLoose ? {lvl: Math.max(h[heroId].lvl - 1, 1)} : {}),
                 };
                 return {
                     ...h,
@@ -107,7 +106,7 @@ console.info('heroCanMove', heroCanMove)
     );
 
     const fight = useCallback(
-        ({monster, x, y}: MapCellType) => {
+        ({monster, x, y}: MapCellType, isOpen: boolean) => {
             if (monster) {
                 setFightModal({
                     monster,
@@ -147,6 +146,11 @@ console.info('heroCanMove', heroCanMove)
                             m![y][x].monster = undefined;
                             return m;
                         });
+                        if (isOpen) {
+                            setHeroCanOpenDoor(false);
+                        } else {
+                            setHeroCanMove(false);
+                        }
                         setHeroTurnEnd(true);
                     },
                 });
@@ -173,7 +177,7 @@ console.info('heroCanMove', heroCanMove)
         ({x, y}: Coordinates) => {
             if (!map) return;
 
-            console.info('cell', map[y][x])
+            // console.info('cell', map[y][x])
             setHeroes((h) => {
                 if (!h) {
                     return null;
@@ -195,6 +199,7 @@ console.info('heroCanMove', heroCanMove)
                     [activeHeroId]: newActiveHero,
                 };
             });
+            const isOpen = map[y][x].isOpen;
             if (!map[y][x].isOpen && heroCanOpenDoor) {
                 setHeroCanOpenDoor(false);
                 setMap(openDoor(map, x, y, config));
@@ -205,7 +210,7 @@ console.info('heroCanMove', heroCanMove)
                 case MapCellTypes.Monster:
                     setHeroTurnEnd(false);
                     setTimeout(() => {
-                        fight(map[y][x])
+                        fight(map[y][x], isOpen)
                     }, 300);
                     break;
                 case MapCellTypes.Treasure:

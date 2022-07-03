@@ -1,5 +1,6 @@
 
 .root {
+  display: flex;
   margin: 0;
   padding: 0;
   width: 100vw;
@@ -7,11 +8,48 @@
   max-width: 100%;
   max-height: 100%;
   background-color: darkslategray;
+  overflow: auto;
+}
+
+.main {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: auto;
+  width: 80%;
+  flex-grow: 1;
+  flex-shrink: 0;
+  height: 100%;
+  background-color: darkslategray;
+}
+
+.sidePanel {
+  width: 20%;
+  min-width: 150px;
+  max-width: 250px;
+  height: 100%;
+  background-color: rgba(0,0,0,.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &Item {
+    padding: 12px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.active {
+      background-color: rgba(0,0,0,.25);
+    }
+  }
+  .lvlText {
+    margin-left: 8px;
+    color: #e6e9ec;
+    font-size: 24px;
+    font-weight: bold;
+  }
 }
 
 .logo {
@@ -25,7 +63,7 @@
   z-index: 9;
 }
 
-.grid {
+.map {
   display: flex;
   flex-wrap: wrap;
   width: var(--map-width);
