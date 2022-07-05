@@ -23,7 +23,8 @@ const App = () => {
                 door: 60,
                 space: 60,
                 bottomWall: 20,
-                monster: 100,
+                monster: 75,
+                chest: 20,
             },
             heroes: heroIdList
         });
@@ -35,7 +36,7 @@ const App = () => {
 
     return (
         <div className={s.app}>
-            <DiManchkin config={config}/>
+            <DiManchkin config={config} onReset={() => setConfig(null)}/>
         </div>
     );
 }

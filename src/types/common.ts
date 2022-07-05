@@ -27,10 +27,12 @@ export type GameConfigProps = {
         space: number;
         bottomWall: number;
         monster: number;
+        chest: number;
     },
     heroes: HeroesListType;
 }
 
 export interface DiManchkinProps {
     config: GameConfigProps;
+    onReset: () => void;
 }

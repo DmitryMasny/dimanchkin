@@ -1,0 +1,71 @@
+.sidePanel {
+  position: relative;
+  width: 20%;
+  min-width: 150px;
+  max-width: 250px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &Item {
+    padding: 8px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.active {
+      background-color: rgba(0, 0, 0, .25);
+    }
+  }
+
+  .lvlText {
+    //margin-left: 8px;
+    text-align: center;
+    color: #e6e9ec;
+    font-size: 28px;
+    font-weight: bold;
+    min-width: 32px;
+  }
+
+  .currentTurn {
+    position: absolute;
+    padding: 16px 0;
+    bottom: 0;
+    color: #e6e9ec;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    padding: 0 8px;
+    margin-left: 4px;
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 20px;
+      font-size: 24px;
+      background-color: #2a4548;
+      color: #adc2c8;
+      border-radius: 12px 12px 0 0;
+      cursor: pointer;
+
+      &:last-child {
+        margin-top: 1px;
+        border-radius: 0 0 12px 12px;
+      }
+
+      &:hover {
+        opacity: .7;
+      }
+    }
+  }
+}

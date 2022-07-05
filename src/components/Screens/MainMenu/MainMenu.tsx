@@ -3,9 +3,8 @@ import React, {FC, useCallback, useState} from 'react';
 
 import {ReactComponent as Logo} from "static/Dimanchkin.svg";
 import s from "./MainMenu.module.scss";
-import {Hero} from "../index";
-import {Button} from "components";
-import {MAX_PLAYERS} from "../../constants";
+import {Button, Hero} from "components";
+import {MAX_PLAYERS} from "../../../constants";
 
 interface MainMenuProps {
     onSelect: (idList: string[]) => void;

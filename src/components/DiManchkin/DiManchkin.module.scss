@@ -23,35 +23,6 @@
   background-color: darkslategray;
 }
 
-.sidePanel {
-  width: 20%;
-  min-width: 150px;
-  max-width: 250px;
-  height: 100%;
-  background-color: rgba(0,0,0,.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  &Item {
-    padding: 12px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &.active {
-      background-color: rgba(0,0,0,.25);
-    }
-  }
-  .lvlText {
-    margin-left: 8px;
-    color: #e6e9ec;
-    font-size: 24px;
-    font-weight: bold;
-  }
-}
-
 .logo {
   display: flex;
   align-items: center;

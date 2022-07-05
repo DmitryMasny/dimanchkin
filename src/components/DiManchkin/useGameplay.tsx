@@ -28,6 +28,7 @@ const useGameplay = ({config}: Props) => {
     const [chestModal, setChestModal] = useState<ChestModalProps | null>(null);
     const [turnModal, setTurnModal] = useState<TurnModalProps | null>(null);
     const [heroTurnEnd, setHeroTurnEnd] = useState<boolean>(false);
+    const [finishGame, setFinishGame] = useState<string>('');
 
     const [heroCanMove, setHeroCanMove] = useState<boolean>(true);
     const [heroCanOpenDoor, setHeroCanOpenDoor] = useState<boolean>(true);
@@ -75,6 +76,21 @@ const useGameplay = ({config}: Props) => {
         }
     }, [currentTurn, turnOrder]);
 
+    const setHero = useCallback(
+        (heroId: string, data: Partial<HeroType>) => {
+            setHeroes((h) => {
+                if (!h) return null;
+                return {
+                    ...h,
+                    [heroId]: {
+                        ...h[heroId],
+                        ...data,
+                    },
+                };
+            });
+        },
+        [],
+    );
     const heroLeakBack = useCallback(
         (heroId: string, isLoose: boolean = false) => {
             setHeroes((h) => {
@@ -130,7 +146,7 @@ const useGameplay = ({config}: Props) => {
                             const newLvl = h[activeHeroId].lvl + 1;
 
                             if (newLvl >= MAX_PLAYER_LVL) {
-                                alert(`Герой ${activeHeroId} победил`)
+                                setFinishGame(activeHeroId);
                             }
 
                             return {
@@ -147,9 +163,9 @@ const useGameplay = ({config}: Props) => {
                             return m;
                         });
                         if (isOpen) {
-                            setHeroCanOpenDoor(false);
-                        } else {
                             setHeroCanMove(false);
+                        } else {
+                            setHeroCanOpenDoor(false);
                         }
                         setHeroTurnEnd(true);
                     },
@@ -159,7 +175,7 @@ const useGameplay = ({config}: Props) => {
         [activeHeroId, heroLeakBack],
     );
     const openChest = useCallback(
-        ({x, y}: MapCellType) => {
+        ({x, y}: MapCellType, isOpen: boolean) => {
             setChestModal({
                 okCallback: () => {
                     setChestModal(null);
@@ -167,6 +183,11 @@ const useGameplay = ({config}: Props) => {
                         m![y][x].type = MapCellTypes.ExTreasure;
                         return m;
                     });
+
+                    if (isOpen) {
+                        setHeroCanMove(false);
+                    }
+                    setHeroTurnEnd(true);
                 },
             });
         },
@@ -216,7 +237,7 @@ const useGameplay = ({config}: Props) => {
                 case MapCellTypes.Treasure:
                     setHeroTurnEnd(false);
                     setTimeout(() => {
-                        openChest(map[y][x])
+                        openChest(map[y][x], isOpen)
                     }, 300);
                     break;
             }
@@ -227,7 +248,7 @@ const useGameplay = ({config}: Props) => {
 
     return ({
         turnOrder,
-        currentTurn,
+        currentTurn: Math.ceil(currentTurn / (turnOrder.length || 1)),
         makeTurn,
         map,
         heroes,
@@ -236,7 +257,9 @@ const useGameplay = ({config}: Props) => {
         fightModal,
         chestModal,
         turnModal,
-        heroCanOpenDoor
+        heroCanOpenDoor,
+        setHero,
+        finishGame,
     })
 };
 

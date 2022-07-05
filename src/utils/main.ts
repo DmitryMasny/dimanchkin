@@ -21,17 +21,29 @@ const getLvlFromRow = (y: number) => {
 
 const randomType = (config: GameConfigProps, y: number) => {
     if (Modes.Simple) {
-        // if (getRandomInt(100) <= config.chances.monster) {}
         if (y === config.rows - 1) {
             return {
                 type: MapCellTypes.Empty,
             }
         }
-        return {
-            type: MapCellTypes.Monster,
-            monster: {
-                lvl: getLvlFromRow(y)
+        let random = getRandomInt(100);
+        if (random <= config.chances.monster) {
+            return {
+                type: MapCellTypes.Monster,
+                monster: {
+                    lvl: getLvlFromRow(y)
+                }
             }
+        } else {
+            random = random - config.chances.monster;
+            if (random <= config.chances.chest) {
+                return {
+                    type: MapCellTypes.Treasure,
+                }
+            }
+        }
+        return {
+            type: MapCellTypes.Empty,
         }
     }
     return {

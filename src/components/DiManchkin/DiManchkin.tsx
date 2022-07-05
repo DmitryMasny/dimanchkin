@@ -4,23 +4,34 @@ import {DiManchkinProps} from 'types';
 
 import s from './DiManchkin.module.scss';
 import {UNIT} from "../../constants";
-import {FightModal, TurnModal, Hero} from "components";
+import {FightModal, TurnModal, Hero, SidePanel, ChestModal, FinishScreen} from "components";
 import useGameplay from "./useGameplay";
 import Map from "../Map";
-import clsx from 'clsx';
 
-const DiManchkin: FC<DiManchkinProps> = ({config}) => {
+const DiManchkin: FC<DiManchkinProps> = ({config, onReset}) => {
 
-    const {map, heroes, activeHeroId, makeTurn, fightModal, turnModal, turnOrder,        currentTurn, heroCanOpenDoor} = useGameplay({config});
+    const {
+        map,
+        heroes,
+        activeHeroId,
+        makeTurn,
+        fightModal,
+        chestModal,
+        turnModal,
+        turnOrder,
+        currentTurn,
+        heroCanOpenDoor,
+        setHero,
+        finishGame
+    } = useGameplay({config});
 
     const mapSizeStyles = useMemo(() => ({width: UNIT * config.cols, height: UNIT * config.rows}), [config]);
 
-    // useEffect(()=>{
-    //     console.info('fightModal', fightModal)
-    // }, [fightModal]);
-
     if (!heroes || !map) {
         return null;
+    }
+    if (finishGame) {
+        return <FinishScreen winner={finishGame} onReset={onReset}/>;
     }
 
     return (
@@ -41,13 +52,13 @@ const DiManchkin: FC<DiManchkinProps> = ({config}) => {
                 </div>
                 <FightModal open={Boolean(fightModal)} {...(fightModal || {})} />
                 {turnModal?.activeHeroId && <TurnModal open={Boolean(turnModal)} {...(turnModal || {})} />}
+                <ChestModal open={Boolean(chestModal)} {...(chestModal || {
+                    okCallback: () => {
+                    }
+                })} />
             </div>
-            <div className={s.sidePanel}>
-                {turnOrder.map((heroId) => <div className={clsx(s.sidePanelItem, heroId === activeHeroId && s.active)}>
-                    <Hero id={heroId} key={heroId}/>
-                    <div className={s.lvlText}>{heroes[heroId].lvl}</div>
-                </div>)}
-            </div>
+            <SidePanel heroes={heroes} turnOrder={turnOrder} activeHeroId={activeHeroId} currentTurn={currentTurn}
+                       setHero={setHero}/>
         </div>
     );
 };

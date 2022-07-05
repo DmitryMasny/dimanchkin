@@ -1,6 +1,9 @@
 export {default as DiManchkin} from './DiManchkin';
-export {default as MainMenu} from './MainMenu';
 export {default as Hero} from './Hero';
 export {default as Button} from './Button';
+export {default as SidePanel} from './SidePanel';
 export {default as FightModal} from './Modals/FightModal';
 export {default as TurnModal} from './Modals/TurnModal';
+export {default as ChestModal} from './Modals/ChestModal';
+export {default as MainMenu} from './Screens/MainMenu';
+export {default as FinishScreen} from './Screens/FinishScreen';
